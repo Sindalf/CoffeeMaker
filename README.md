@@ -9,3 +9,4 @@ How to run: java -jar CoffeeMaker.jar
 
 Junit: junit-4.12.jar
 Mockito: mockito-all-1.10.19.jar
+Code Coverage Program: JaCoCoverage Netbeans plugin. This program factors Main() into its coverage. 
