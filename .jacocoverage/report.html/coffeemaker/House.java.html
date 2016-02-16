@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>House.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;CoffeeMaker&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">coffeemaker</a> &gt; <span class="el_source">House.java</span></div><h1>House.java</h1><pre class="source lang-java linenums">package coffeemaker;
+
+import java.util.LinkedList;
+
+public class House {
+    LinkedList&lt;Room&gt; rooms;
+    
+    int currentRoom;
+    
+<span class="fc" id="L10">    public House() {</span>
+<span class="fc" id="L11">        rooms = new LinkedList&lt;Room&gt;();</span>
+<span class="fc" id="L12">        currentRoom = 0;</span>
+<span class="fc" id="L13">    }</span>
+    
+    public int addRoom(String description, String uniqueItem, String item, String southDoor, String northDoor) {
+<span class="fc" id="L16">       rooms.add(new Room(description, uniqueItem, item, southDoor, northDoor));</span>
+       
+<span class="fc" id="L18">       return 1; // Success</span>
+   }
+   
+    public String lookForItem() {
+<span class="fc" id="L22">        return rooms.get(currentRoom).getItem();</span>
+    }
+    
+    public int goNorth() {
+<span class="fc" id="L26">        currentRoom = currentRoom + 1;</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">        if(currentRoom &gt;= rooms.size()) {</span>
+<span class="fc" id="L28">            currentRoom = rooms.size() - 1;</span>
+        }
+<span class="fc" id="L30">        return currentRoom;</span>
+    }
+    public int goSouth() {
+<span class="fc" id="L33">        currentRoom = currentRoom - 1;</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        if(currentRoom &lt; 0) {</span>
+<span class="fc" id="L35">            currentRoom = 0;</span>
+        }
+<span class="fc" id="L37">        return currentRoom;</span>
+    }
+    
+    public String[] getDetails() {
+<span class="fc" id="L41">        String[] details = new String[4];</span>
+<span class="fc" id="L42">        Room room = rooms.get(currentRoom);</span>
+<span class="fc" id="L43">        details[0] = room.getDescription();</span>
+<span class="fc" id="L44">        details[1] = room.getUniqueItem();</span>
+<span class="fc" id="L45">        details[2] = room.getSouthDoor();</span>
+<span class="fc" id="L46">        details[3] = room.getNorthDoor();</span>
+<span class="fc" id="L47">        return details;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

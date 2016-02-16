@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Player.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;CoffeeMaker&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">coffeemaker</a> &gt; <span class="el_source">Player.java</span></div><h1>Player.java</h1><pre class="source lang-java linenums">package coffeemaker;
+ 
+import java.util.HashMap;
+
+public class Player {
+    String[] inventory;
+    String[] truth;
+<span class="fc" id="L8">    HashMap answers = new HashMap();</span>
+<span class="fc" id="L9">    public Player() {</span>
+<span class="fc" id="L10">        inventory = new String[3];</span>
+<span class="fc" id="L11">        truth = new String[3];</span>
+<span class="fc" id="L12">        inventory[0] = &quot;no coffee&quot;;</span>
+<span class="fc" id="L13">        inventory[1] = &quot;no cream&quot;;</span>
+<span class="fc" id="L14">        inventory[2] = &quot;no sugar&quot;;</span>
+<span class="fc" id="L15">        truth[0] = &quot;0&quot;;</span>
+<span class="fc" id="L16">        truth[1] = &quot;0&quot;;</span>
+<span class="fc" id="L17">        truth[2] = &quot;0&quot;;</span>
+<span class="fc" id="L18">        populateMap(answers);</span>
+<span class="fc" id="L19">    }</span>
+                    
+    public int addItem(String item) {
+<span class="fc bfc" id="L22" title="All 2 branches covered.">        if(item.equals(&quot;coffee&quot;)) {</span>
+<span class="fc" id="L23">            inventory[0] = &quot;a cup of delicious coffee.&quot;;</span>
+<span class="fc" id="L24">            truth[0] = &quot;1&quot;;</span>
+<span class="fc" id="L25">            return 1;</span>
+        }
+<span class="fc bfc" id="L27" title="All 2 branches covered.">        else if(item.equals(&quot;cream&quot;)) {</span>
+<span class="fc" id="L28">            inventory[1] = &quot;some fresh cream.&quot;;</span>
+<span class="fc" id="L29">            truth[1] = &quot;1&quot;;</span>
+<span class="fc" id="L30">            return 1;</span>
+        }
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        else if(item.equals(&quot;sugar&quot;)) {</span>
+<span class="fc" id="L33">            inventory[2] = &quot;some tasty sugar.&quot;;</span>
+<span class="fc" id="L34">            truth[2] = &quot;1&quot;;</span>
+<span class="fc" id="L35">            return 1;</span>
+        }
+<span class="fc" id="L37">        return 0;</span>
+    }
+
+    public int checkInventory() {
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        for(int i = 0; i &lt; inventory.length; i++) {</span>
+<span class="fc" id="L42">            System.out.println(&quot;You have &quot; + inventory[i]);</span>
+        }
+<span class="fc" id="L44">        return 1;</span>
+    }
+    
+    public String checkWin() {
+<span class="fc" id="L48">        String result = truth[0] + truth[1] + truth[2];</span>
+<span class="fc" id="L49">        System.out.println(answers.get(result));</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        if(result.equals(&quot;111&quot;)) {</span>
+<span class="fc" id="L51">            System.out.println(&quot;You win!&quot;);</span>
+        }
+        else {
+<span class="fc" id="L54">            System.out.println(&quot;You lose!&quot;);</span>
+        }
+<span class="fc" id="L56">        return &quot;true&quot;;</span>
+    }
+    
+    private void populateMap(HashMap answers) {
+<span class="fc" id="L60">        answers.put(&quot;000&quot;, &quot;You drink the air, as you have no coffee, sugar, or cream.\n&quot; +</span>
+        &quot;The air is invigorating, but not invigorating enough.  You cannot study&quot;);
+        
+<span class="fc" id="L63">        answers.put(&quot;010&quot;, &quot;You drink the cream, but without caffeine, you cannot study&quot;);</span>
+<span class="fc" id="L64">        answers.put(&quot;100&quot;, &quot;Without cream, you get an ulcer and cannot study.&quot;);</span>
+<span class="fc" id="L65">        answers.put(&quot;001&quot;, &quot;You eat the sugar, but without caffeine, you cannot study.&quot;);</span>
+        
+<span class="fc" id="L67">        answers.put(&quot;110&quot;, &quot;Without sugar, the coffee is too bitter.  You cannot study.&quot;);</span>
+<span class="fc" id="L68">        answers.put(&quot;011&quot;, &quot;You drink the sweetened cream, but without caffeine, you cannot study.&quot;);</span>
+<span class="fc" id="L69">        answers.put(&quot;101&quot;, &quot;Without cream, you get an ulcer and cannot study.&quot;);</span>
+        
+<span class="fc" id="L71">        answers.put(&quot;111&quot;, &quot;You drink the beverage and are ready to study!&quot;);</span>
+<span class="fc" id="L72">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Game.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;CoffeeMaker&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">coffeemaker</a> &gt; <span class="el_source">Game.java</span></div><h1>Game.java</h1><pre class="source lang-java linenums">package coffeemaker;
+
+
+public class Game {
+    House house;
+    String[] descriptions; 
+    String[] uniqueItems;
+    String[] items;
+    String[] doors;
+    Player player;
+    // String description, String uniqueItem, String item, String southDoor, String northDoor
+
+<span class="fc" id="L13">    public Game(String[] descriptions, String[] uniqueItems, String[] items, String[] doors) {</span>
+<span class="fc" id="L14">        this.descriptions = descriptions;</span>
+<span class="fc" id="L15">        this.uniqueItems = uniqueItems;</span>
+<span class="fc" id="L16">        this.items = items;</span>
+<span class="fc" id="L17">        this.doors = doors;</span>
+<span class="fc" id="L18">        house = new House();</span>
+<span class="fc" id="L19">        fillHouse(house); </span>
+<span class="fc" id="L20">        player = new Player();</span>
+<span class="fc" id="L21">    }</span>
+    
+    public int fillHouse(House house) {
+<span class="fc" id="L24">        int door = 0;</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        for(int i = 0; i &lt; descriptions.length; i++) {</span>
+<span class="fc" id="L26">            house.addRoom(descriptions[i], uniqueItems[i], items[i], doors[door], doors[door+1]);</span>
+<span class="fc" id="L27">            door = door + 2;</span>
+        }
+<span class="fc" id="L29">        return 1;</span>
+    }
+    
+    public String[] getCurrentRoom() {
+<span class="fc" id="L33">        return house.getDetails();</span>
+    }
+    
+    public String handleInput(String input) {
+<span class="fc" id="L37">        input = input.toLowerCase();</span>
+        
+<span class="pc bpc" id="L39" title="6 of 26 branches missed.">        switch (input) {</span>
+            case &quot;n&quot;:
+<span class="fc" id="L41">                house.goNorth();</span>
+<span class="fc" id="L42">                return &quot;n&quot;;</span>
+            case &quot;s&quot;:
+<span class="fc" id="L44">                house.goSouth();</span>
+<span class="fc" id="L45">                return &quot;s&quot;;</span>
+            case &quot;l&quot;:
+<span class="fc" id="L47">                String item = house.lookForItem();</span>
+<span class="fc" id="L48">                displayItem(item);</span>
+<span class="pc bpc" id="L49" title="1 of 2 branches missed.">                if(item != null) {</span>
+<span class="fc" id="L50">                    player.addItem(item);</span>
+                }
+<span class="fc" id="L52">                return item;</span>
+            case &quot;i&quot;:
+<span class="fc" id="L54">                player.checkInventory();</span>
+<span class="fc" id="L55">                return &quot;i&quot;;</span>
+            case &quot;d&quot;:
+<span class="fc" id="L57">                return player.checkWin();</span>
+            case &quot;h&quot;:
+<span class="fc" id="L59">                displayHelp();</span>
+<span class="fc" id="L60">                return &quot;h&quot;;</span>
+            default:
+                break;
+        }
+<span class="fc" id="L64">        System.out.println(&quot;What?&quot;);</span>
+<span class="fc" id="L65">        return null;</span>
+    }
+   
+    public int displayItem(String item) {
+<span class="fc bfc" id="L69" title="All 2 branches covered.">        if(item == null) {</span>
+<span class="fc" id="L70">            System.out.println(&quot;You don't see anything out of the ordinary.&quot;);</span>
+<span class="fc" id="L71">            return 0;</span>
+        }
+<span class="pc bpc" id="L73" title="3 of 14 branches missed.">        switch (item) {</span>
+            case &quot;coffee&quot;:
+<span class="fc" id="L75">                System.out.println(&quot;There might be something here... &quot;);</span>
+<span class="fc" id="L76">                System.out.println(&quot;You found some caffeinated coffee!&quot;);</span>
+<span class="fc" id="L77">                return 1;</span>
+            case &quot;cream&quot;:
+<span class="fc" id="L79">                System.out.println(&quot;There might be something here... &quot;);</span>
+<span class="fc" id="L80">                System.out.println(&quot;You found some creamy cream!&quot;);</span>
+<span class="fc" id="L81">                return 2;</span>
+            case &quot;sugar&quot;:
+<span class="fc" id="L83">                System.out.println(&quot;There might be something here... &quot;);</span>
+<span class="fc" id="L84">                System.out.println(&quot;You found some sweet sugar!&quot;);</span>
+<span class="fc" id="L85">                return 3;</span>
+            default:
+<span class="fc" id="L87">                return -9999;</span>
+        }
+        
+        
+    }
+    public void displayHelp() {
+<span class="fc" id="L93">        System.out.println(&quot;You are a busy student who needs to study but you don't have any coffee! &quot;</span>
+                + &quot;Search the house to look for coffee ingredients. &quot; +
+                &quot;When all ingredients have been found you can drink your coffee and start studying.&quot;);
+<span class="fc" id="L96">        System.out.println(&quot;Enter N to go north&quot;);</span>
+<span class="fc" id="L97">        System.out.println(&quot;Enter S to go south&quot;);</span>
+<span class="fc" id="L98">        System.out.println(&quot;Enter L to look around the room&quot;);</span>
+<span class="fc" id="L99">        System.out.println(&quot;Enter I to check your inventory&quot;);</span>
+<span class="fc" id="L100">        System.out.println(&quot;Enter D to drink coffee, this ends the game win/lose&quot;);</span>
+<span class="fc" id="L101">    }</span>
+        
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>
